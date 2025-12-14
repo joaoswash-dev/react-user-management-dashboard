@@ -2,13 +2,17 @@
 
 A user management dashboard built with **React** and **TypeScript**, focused on displaying, managing, and visualizing user data in an admin-style SaaS interface.
 
+## 🔗 Live Demo
+https://react-user-management-dashboard-three.vercel.app/
+
 ## 🚀 Features
 - User-focused dashboard KPIs
 - Async data fetching with mocked API
-- User listing with status indicators
-- Clean and scalable component structure
+- User status filtering (All / Active / Inactive)
+- User listing with visual status indicators
+- User details modal with overlay and ESC support
+- Clean and scalable component-based architecture
 - Responsive SaaS-style layout
-
 
 ## 🛠 Tech Stack
 - React
