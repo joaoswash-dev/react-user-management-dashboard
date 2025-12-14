@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Card } from '../../components/Card/Card';
 import { Table } from '../../components/Table/Table';
+import { UserModal } from '../../components/UserModal/UserModal';
 
 import { fetchUsers } from '../../services/api';
 import type { User } from '../../services/api';
@@ -15,6 +16,8 @@ export function Dashboard() {
     const [filter, setFilter] = useState<'All' | 'Active' | 'Inactive'>('All');
     const filterOptions: FilterOption[] = ['All', 'Active', 'Inactive'];
     const filteredUsers = filter === 'All' ? data : data.filter(user => user.status === filter);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
 
     useEffect(() => {
         fetchUsers().then(res => {
@@ -45,7 +48,18 @@ export function Dashboard() {
                 ))}
             </div>
 
-            {loading ? <p>Loading users...</p> : <Table users={filteredUsers} />}
+            {loading ? <p>Loading users...</p> : <Table
+                users={filteredUsers}
+                onViewUser={user => setSelectedUser(user)}
+            />
+            }
+            {selectedUser && (
+                <UserModal
+                    user={selectedUser}
+                    onClose={() => setSelectedUser(null)}
+                />
+            )}
+
         </div>
     );
 }

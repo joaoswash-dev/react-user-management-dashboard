@@ -3,9 +3,11 @@ import type { User } from '../../services/api';
 
 type TableProps = {
     users: User[];
+    onViewUser: (user: User) => void;
 };
 
-export function Table({ users }: TableProps) {
+
+export function Table({ users, onViewUser }: TableProps) {
     return (
         <div className={styles.wrapper}>
             <table className={styles.table}>
@@ -41,7 +43,7 @@ export function Table({ users }: TableProps) {
                         <td>
                             <button
                                 className={styles.action}
-                                onClick={() => console.log(user)}
+                                onClick={() => onViewUser(user)}
                             >
                                 View
                             </button>
