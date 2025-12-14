@@ -9,3 +9,35 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 16px;
 }
+.filters {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0 24px;
+}
+
+.filterButton {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filterButton:hover {
+    background: #f3f4f6;
+}
+
+.activeFilter {
+    background: #111827;
+    color: #ffffff;
+    border-color: #111827;
+}
+
+.activeFilter:hover {
+    background: #111827;
+    color: #ffffff;
+}

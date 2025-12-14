@@ -9,8 +9,12 @@ import type { User } from '../../services/api';
 import styles from './Dashboard.module.css';
 
 export function Dashboard() {
+    type FilterOption = 'All' | 'Active' | 'Inactive';
     const [data, setData] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState<'All' | 'Active' | 'Inactive'>('All');
+    const filterOptions: FilterOption[] = ['All', 'Active', 'Inactive'];
+    const filteredUsers = filter === 'All' ? data : data.filter(user => user.status === filter);
 
     useEffect(() => {
         fetchUsers().then(res => {
@@ -27,8 +31,21 @@ export function Dashboard() {
                 <Card title="Inactive Users" value="421" subtitle="-1.3%" />
                 <Card title="New Users" value="78" subtitle="Last 7 days" />
             </div>
+            <div className={styles.filters}>
+                {filterOptions.map(option => (
+                    <button
+                        key={option}
+                        onClick={() => setFilter(option)}
+                        className={`${styles.filterButton} ${
+                            filter === option ? styles.activeFilter : ''
+                        }`}
+                    >
+                        {option}
+                    </button>
+                ))}
+            </div>
 
-            {loading ? <p>Loading users...</p> : <Table users={data} />}
+            {loading ? <p>Loading users...</p> : <Table users={filteredUsers} />}
         </div>
     );
 }
