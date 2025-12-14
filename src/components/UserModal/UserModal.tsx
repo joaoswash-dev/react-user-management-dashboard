@@ -1,5 +1,6 @@
 import styles from './UserModal.module.css';
 import type { User } from '../../services/api';
+import { useEffect } from 'react';
 
 type UserModalProps = {
     user: User | null;
@@ -8,6 +9,20 @@ type UserModalProps = {
 
 export function UserModal({ user, onClose }: UserModalProps) {
     if (!user) return null;
+
+    useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
 
     return (
         <div className={styles.overlay} onClick={onClose}>
